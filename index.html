@@ -9,7 +9,13 @@
 <body>
     <h1>Andamento Temperature </h1>
 
-    <div class ="container">
+    <div class="input-section">
+        <input type="text" id="macchinaInput" placeholder="Nome macchina" class="input-field">
+        <input type="number" id="temperatureInput" placeholder="Temperatura (°C)" class="input-field">
+        <button onclick="aggiungiMacchina()" class="btn-aggiungi">Aggiungi</button>
+    </div>
+
+    <div class ="container" id="container">
         <div class ="register">
 
         <div class ="macchina ">Torino</div>
@@ -30,3 +36,34 @@
 
 </body>
 </html>
+
+<script>
+    function aggiungiMacchina() {
+        const nome = document.getElementById('macchinaInput').value;
+        const temperatura = document.getElementById('temperatureInput').value;
+        
+        if (nome.trim() === '' || temperatura.trim() === '') {
+            alert('Inserisci nome e temperatura!');
+            return;
+        }
+        
+        const container = document.getElementById('container');
+        const newRegister = document.createElement('div');
+        newRegister.className = 'register';
+        newRegister.innerHTML = `
+            <div class="macchina">${nome}</div>
+            <div class="temperature">${temperatura}</div>
+        `;
+        
+        container.appendChild(newRegister);
+        
+        document.getElementById('macchinaInput').value = '';
+        document.getElementById('temperatureInput').value = '';
+    }
+    
+    document.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            aggiungiMacchina();
+        }
+    });
+</script>
